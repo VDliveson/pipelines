@@ -18,7 +18,7 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: 3.7
+        python-version: 3.8
     - name: Run tests 
       run: |
         ./backend/src/v2/test/integration-test.sh
@@ -39,11 +39,11 @@ jobs:
         with:
           cluster_name: build-kubeflow
       - name: Run tests
-        run: >
-          ./test/postsubmit-tests-with-pipeline-deployment.sh
-          --kfp_deployment mkp
-          --workflow_file e2e_test_gke_v2.yaml
-          --test_result_folder e2e_test
+        run: |
+          ./test/postsubmit-tests-with-pipeline-deployment.sh \
+          --kfp_deployment mkp \
+          --workflow_file e2e_test_gke_v2.yaml \
+          --test_result_folder e2e_test \
           --timeout "7200"
       - name: Collect test results
         if: always()
